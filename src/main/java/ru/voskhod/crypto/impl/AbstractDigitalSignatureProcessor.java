@@ -198,7 +198,7 @@ public abstract class AbstractDigitalSignatureProcessor implements DigitalSignat
                 signatureElement = (Element) tmpDocumentRootElement.appendChild(tmpDocument.importNode(argSignatureElement, true));
                 Element signedContent = (Element) tmpDocumentRootElement.appendChild(tmpDocument.importNode(argSignedContent, true));
 
-                //Fix see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640
+                //Fix, see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640.
                 Attr attributeNode = signedContent.getAttributeNode("Id");
                 signedContent.setIdAttributeNode(attributeNode, true);
                 tmpDocument.normalizeDocument();

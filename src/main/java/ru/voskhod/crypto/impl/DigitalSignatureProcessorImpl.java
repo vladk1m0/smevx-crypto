@@ -39,7 +39,7 @@ public class DigitalSignatureProcessorImpl extends AbstractDigitalSignatureProce
                 referenceURI = "";
             }
 
-            //Fix, see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640
+            //Fix, see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640.
             Attr attributeNode = _element2Sign.getAttributeNode("Id");
             if (attributeNode != null && !"".equals(attributeNode.getValue().trim())) {
                 _element2Sign.setIdAttributeNode(attributeNode, true);

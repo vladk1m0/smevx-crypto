@@ -98,7 +98,7 @@ public class XmlDSignUtils {
         final Element appDataNode = (Element) XPathAPI.selectSingleNode(doc, "//*[local-name()='MessageData']/*[local-name()='AppData']");
         appDataNode.setAttribute("Id", "AppData");
 
-        // Fix see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640
+        // Fix, see description https://www.cryptopro.ru/forum2/default.aspx?g=posts&t=5640.
         Attr attributeNode = appDataNode.getAttributeNode("Id");
         if (attributeNode != null) {
             appDataNode.setIdAttributeNode(attributeNode, true);

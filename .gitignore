@@ -1,0 +1,39 @@
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# Mac OSX
+######################
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################
+# Others
+######################
+*.*~
+*~
+.merge_file*
+*.log
+
+######################
+# Project
+######################
+.gradle/
+.idea/
+gradle/
+build/
+out/
+
+*.iml

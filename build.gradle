@@ -1,0 +1,40 @@
+group 'ru.smevx.crypto'
+version '2.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.apache.commons:commons-lang3:3.6')
+
+    compile('org.bouncycastle:bcprov-jdk15on:1.50')
+    compile('org.bouncycastle:bcpkix-jdk15on:1.50')
+
+    compile('commons-logging:commons-logging:1.1.1')
+
+    compile('xalan:serializer:2.7.1')
+    compile('xalan:xalan:2.7.0')
+
+    compile('org.apache.santuario:xmlsec:1.5.8')
+    compile('org.apache.ws.security:wss4j:1.6.6') {
+        exclude group: 'org.opensaml', module: 'opensaml'
+    }
+
+    compile('com.google.guava:guava:17.0')
+
+    testCompile('junit:junit:4.12')
+}
+
+task install(type: Copy) {
+    dependsOn build
+    into "$buildDir/libs/deps"
+    from configurations.compile
+}

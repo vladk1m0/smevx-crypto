@@ -55,7 +55,6 @@ public class XmlDSignUtils {
             final String id = data.getAttribute("Id");
             if (StringUtils.isBlank(id)) {
                 data.setAttribute("Id", UUIDGenerator.getUUID());
-                ;
             }
 
             return signXMLDSigDetached(privateKey, cert, data, UUIDGenerator.getUUID().substring(0, 7));

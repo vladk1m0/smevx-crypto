@@ -1,9 +1,7 @@
 package ru.smevx.crypto.smev3.xmldsig;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ws.security.util.UUIDGenerator;
 import org.w3c.dom.Element;
-import ru.CryptoPro.JCPxml.xmldsig.JCPXMLDSigInit;
 import ru.voskhod.crypto.DigitalSignatureFactory;
 
 import java.security.PrivateKey;
@@ -19,14 +17,6 @@ import java.security.cert.X509Certificate;
 public class XmlDSignUtils {
 
     private static final String JCP_PROVIDER_NAME = "JCP";
-
-    static {
-        org.apache.xml.security.Init.init();
-        // Инициализация КритптоПРО JCP сервис-провайдера.
-        if (!JCPXMLDSigInit.isInitialized()) {
-            JCPXMLDSigInit.init();
-        }
-    }
 
     /**
      * Медод формирование ЭП в формате XMLDSign для элемента DOM дерева (в соответствии с МР ЕСМЭВ 3.Х).
@@ -54,10 +44,10 @@ public class XmlDSignUtils {
 
             final String id = data.getAttribute("Id");
             if (StringUtils.isBlank(id)) {
-                data.setAttribute("Id", UUIDGenerator.getUUID());
+                data.setAttribute("Id", "id-" + Math.round(data.getTagName().length() * Math.random()));
             }
 
-            return signXMLDSigDetached(privateKey, cert, data, UUIDGenerator.getUUID().substring(0, 7));
+            return signXMLDSigDetached(privateKey, cert, data, null);
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
@@ -87,9 +77,10 @@ public class XmlDSignUtils {
         }
 
         try {
-            DigitalSignatureFactory.init(JCP_PROVIDER_NAME);
 
+            DigitalSignatureFactory.init(JCP_PROVIDER_NAME);
             final X509Certificate cert = DigitalSignatureFactory.getDigitalSignatureProcessor().validateXMLDSigDetachedSignature(data, signature);
+
             cert.checkValidity();
 
             return true;

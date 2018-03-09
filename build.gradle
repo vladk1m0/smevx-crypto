@@ -63,3 +63,5 @@ task installDeps(type: Copy) {
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
+
+check.dependsOn.remove(test)

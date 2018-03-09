@@ -1,0 +1,46 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+            wsu:Id="body">
+        <ns5:getResult xmlns:ns4="http://baseTypes.border.webservices.kernel.sx.fms.ru"
+                       xmlns:ns5="http://v2_4_3.incomingRequests.webservices.kernel.sx.fms.ru"
+                       xmlns="http://smev.gosuslugi.ru/rev111111">
+            <Message>
+                <Sender>
+                    <Code>FMS001001</Code>
+                    <Name>ФМС России</Name>
+                </Sender>
+                <Recipient>
+                    <Code>FMS001001</Code>
+                    <Name>ФМС России</Name>
+                </Recipient>
+                <Originator>
+                    <Code>FMS001001</Code>
+                    <Name>ФМС России</Name>
+                </Originator>
+                <TypeCode>GSRV</TypeCode>
+                <Status>PING</Status>
+                <Date>2015-12-15T11:38:42.762+04:00</Date>
+                <ExchangeType>3</ExchangeType>
+                <RequestIdRef>4587221d-56ba-4589-80f6-8c2cae5c3f1c</RequestIdRef>
+                <OriginRequestIdRef>4587221d-56ba-4589-80f6-8c2cae5c3f1c</OriginRequestIdRef>
+                <ServiceCode>10000000611</ServiceCode>
+                <CaseNumber></CaseNumber>
+                <TestMsg>FMS control example</TestMsg>
+            </Message>
+            <MessageData>
+                <AppData>
+                    <ns4:user>
+                        <ns4:organization>10000001022</ns4:organization>
+                        <ns4:person>
+                            <ns4:id>4713967</ns4:id>
+                            <ns4:firstName>Тест</ns4:firstName>
+                            <ns4:secondName>Тестович</ns4:secondName>
+                            <ns4:lastName>Тестов</ns4:lastName>
+                        </ns4:person>
+                    </ns4:user>
+                    <ns4:taskId>T-0001</ns4:taskId>
+                </AppData>
+            </MessageData>
+        </ns5:getResult>
+    </S:Body>
+</S:Envelope>

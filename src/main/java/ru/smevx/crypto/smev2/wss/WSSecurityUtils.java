@@ -41,8 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static ru.CryptoPro.JCPxml.Consts.URI_GOST_DIGEST;
-import static ru.CryptoPro.JCPxml.Consts.URI_GOST_SIGN;
+import static ru.CryptoPro.JCPxml.Consts.*;
 
 /**
  * Класс {@link WSSecurityUtils} реализующий методы формирования и проверки ЭП-ОВ в соответствии с п. 5.1 документа  "Методические рекомендации по работе с Единой системой межведомственного электронного взаимодействия 2.х".
@@ -179,11 +178,25 @@ public class WSSecurityUtils {
         final Reference ref = fac.newReference("#body", fac.newDigestMethod(URI_GOST_DIGEST, null), transformList, null, null);
 
         // Создаем элемент содержащий информацию о ЭП SOAP - сообщения.
+        SignatureMethod signatureMethod;
+        switch (cert.getSigAlgName()) {
+            case "1.2.643.7.1.1.3.2":
+                signatureMethod = fac.newSignatureMethod(URN_GOST_SIGN_2012_256, null);
+                break;
+            case "1.2.643.7.1.1.3.3":
+                signatureMethod = fac.newSignatureMethod(URN_GOST_SIGN_2012_512, null);
+                break;
+            case "1.2.643.2.2.3":
+                signatureMethod = fac.newSignatureMethod(URN_GOST_SIGN, null);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown signature alg. "+cert.getSigAlgName());
+        }
         final SignedInfo si = fac.newSignedInfo(fac.newCanonicalizationMethod(CanonicalizationMethod.EXCLUSIVE,
                 (C14NMethodParameterSpec) null),
-                fac.newSignatureMethod(URI_GOST_SIGN, null),
+                signatureMethod,
                 Collections.singletonList(ref));
-
         // Получение public key из сертификата.
         final KeyInfoFactory kif = fac.getKeyInfoFactory();
         final X509Data x509d = kif.newX509Data(Collections.singletonList(cert));
